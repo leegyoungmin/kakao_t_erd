@@ -12,7 +12,6 @@
 #### 6. [회고](#📝-6-회고)
 
 ## 🧑🏻‍💻 1. 팀원
-
 |미니|-|
 | :--------: | :--------: |
 | <img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src="https://i.imgur.com/ikEGO8k.jpg">    | |
@@ -20,7 +19,7 @@
 
 ## 🔖 2. 순서도
 ### Logical ER Diagram
-![UML](https://i.imgur.com/UhNQmT8.png)
+<img src="Logical_ERD_1.png"/>
 
 ### Relation Model
 

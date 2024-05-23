@@ -39,12 +39,6 @@ create table if not exists TAXI_CALL(
     user_id int not null,
     foreign key (user_id) references USER(user_id) on delete no action
 );
-/*
-사용자 삭제 시, TAXI CALL 데이터를 남기는 방법이 없다.
-- 데이터를 null로 만들어서 삭제된 사용자라는 것을 표시해야 한다.
-- Default Value로 -1과 같은 특이한 값을 주어서 삭제된 사용자라는 것을 표시한다.
-- 삭제가 되는 경우, 함께 삭제한다.
-*/
 
 create table if not exists REGION(
 	region varchar(20) primary key,
