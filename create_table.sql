@@ -1,6 +1,11 @@
-create database gyoungmin;
+create database if not exists gyoungmin;
 
 use gyoungmin;
+
+create table if not exists FAMILY(
+    family_id int primary key,
+    user_id int not null
+);
 
 create table if not exists USER(
 	user_id int not null primary key auto_increment,
@@ -8,7 +13,8 @@ create table if not exists USER(
     phone_number char(13) not null,
     birth int(6) not null,
     point int not null default 0,
-    family_id int
+    family_id int,
+    foreign key (family_id) references FAMILY (family_id) on delete set null
 );
 
 create table if not exists PAYMENT_METHOD(
@@ -18,17 +24,8 @@ create table if not exists PAYMENT_METHOD(
     cvc smallint(3) not null,
     password smallint(2) not null,
     primary key (payment_info, user_id),
-    foreign key (user_id) references USER(user_id)
+    foreign key (user_id) references USER(user_id) on delete cascade
 );
-
-create table if not exists FAMILY(
-	family_id int primary key,
-    user_id int not null,
-    foreign key (user_id) references USER(user_id)
-);
-
-alter table USER add constraint family_id
-foreign key (family_id) references FAMILY (family_id);
 
 create table if not exists TAXI_CALL(
 	call_id int primary key auto_increment,
@@ -40,8 +37,14 @@ create table if not exists TAXI_CALL(
     apx_payment int not null default 0,
     call_time timestamp not null default current_timestamp,
     user_id int not null,
-    foreign key (user_id) references USER(user_id)
+    foreign key (user_id) references USER(user_id) on delete no action
 );
+/*
+사용자 삭제 시, TAXI CALL 데이터를 남기는 방법이 없다.
+- 데이터를 null로 만들어서 삭제된 사용자라는 것을 표시해야 한다.
+- Default Value로 -1과 같은 특이한 값을 주어서 삭제된 사용자라는 것을 표시한다.
+- 삭제가 되는 경우, 함께 삭제한다.
+*/
 
 create table if not exists REGION(
 	region varchar(20) primary key,
@@ -54,7 +57,7 @@ create table if not exists DRIVER(
     company varchar(100) not null,
     region varchar(20) not null,
     rating int,
-    foreign key (region) references REGION (region)
+    foreign key (region) references REGION (region) on update cascade
 );
 
 create table if not exists CAR(
@@ -62,7 +65,7 @@ create table if not exists CAR(
     is_premium bool not null default False,
     car_num varchar(16) not null,
     car_type varchar(100) not null,
-    foreign key (driver_id) references DRIVER (driver_id)
+    foreign key (driver_id) references DRIVER (driver_id) on delete cascade
 );
 
 create table if not exists TAXI_CATCH(
@@ -72,8 +75,8 @@ create table if not exists TAXI_CATCH(
     comment varchar(100) not null,
     catch_time timestamp not null default current_timestamp,
     
-    foreign key (call_id) references TAXI_CALL (call_id),
-    foreign key (driver_id) references DRIVER (driver_id),
+    foreign key (call_id) references TAXI_CALL (call_id) on delete cascade,
+    foreign key (driver_id) references DRIVER (driver_id) on delete no action,
     
     primary key (call_id, driver_id)
 );
@@ -81,7 +84,7 @@ create table if not exists TAXI_CATCH(
 create table if not exists PAYMENT(
 	call_id int not null,
     payment_result int,
-    foreign key (call_id) references TAXI_CALL (call_id),
+    foreign key (call_id) references TAXI_CALL (call_id) on delete no action on update no action,
     primary key (call_id)
 );
 
@@ -204,5 +207,7 @@ from (
 TAXI_CALL as t
 where t.user_id = u.user_id;
 
-
+-- 사용자 삭제 시 결제 방법 삭제 확인
+select * from USER;
+delete from USER where user_id = 5;
 
