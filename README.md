@@ -5,44 +5,36 @@
 
 ## 📍 목차
 #### 1. [팀원](#🧑🏻‍💻-1-팀원)
-#### 2. [순서도](#🔖-2-순서도)
-#### 3. [타임라인](#⏱-3-타임라인)
-#### 4. [고민한 점](#💻-4-고민한-점)
-#### 5. [개선점](#🎯-5-개선점)
-#### 6. [회고](#📝-6-회고)
+#### 2. [파일 정보](#🔖-2-파일-정보)
 
 ## 🧑🏻‍💻 1. 팀원
-|미니|-|
-| :--------: | :--------: |
-| <img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src="https://i.imgur.com/ikEGO8k.jpg">    | |
-| <a href="https://github.com/leegyoungmin"> <center>*@Minii*</center></a>| |
-
-## 🔖 2. 순서도
-### Logical ER Diagram
-<img src="Logical_ERD_1.png"/>
-
-### Relation Model
-
-### Pysical Diagram
-
-## ⏱ 3. 타임라인
-    
-## 💻 4. 고민한 점
-1. 유저에서 기사에 대한 권한을 어떻게 생성할 것인가?
-
-2. 차량의 이동 데이터 저장
-
-
-## 🎯 5. 개선점
-
-## 📝 6. 회고 
-**※ 각자 작성해서 구분해서 올리기**
-#### 서용원
-
+#### 대장 : 서용원
+#### 서용수
 #### 최서우
-
 #### 주현범
+#### 이경민
 
-#### 서영수
+## 🔖-2-파일-정보
 
-#### 이경민B
+```bash
+.
+├── README.md
+├── coordinator.tsv (지역 정보 생성을 위한 파일)
+├── table_data (Generated Fake Data)
+│   ├── car_table_data.csv
+│   ├── credict_card_table_data.csv
+│   ├── driver_table_data.csv
+│   ├── payment_result_table_data.csv
+│   ├── payment_table_data.csv
+│   ├── region_table_data.csv
+│   ├── taxi_call_table_data.csv
+│   ├── taxi_catch_table_data.csv
+│   └── user_table_fake_data.csv
+└── workspace
+    ├── faker_data_generator.ipynb (Fake Data 생성 스크립트)
+    ├── create_database.sql (DB 및 테이블 생성 SQL 구문)
+    └── insert_test.sql (테이블 내 데이터 생성 SQL 구문)
+```
+
+# 프로젝트 실행 순서
+create_database.sql -> insert_test.sql
